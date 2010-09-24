@@ -1,0 +1,112 @@
+<html lang="en">
+<head>
+<title>Example echo client - GNU WebSocket4J Reference Manual (version 1.3)</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="GNU WebSocket4J Reference Manual (version 1.3)">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="prev" href="Example-echo-server.html#Example-echo-server" title="Example echo server">
+<link rel="next" href="GNU-Free-Documentation-License.html#GNU-Free-Documentation-License" title="GNU Free Documentation License">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<!--
+This file is part of GNU WebSocket4J Reference Manual (version 1.3).
+
+Copyright (C) 2010  Marek Aaron Sapota
+
+     Permission is granted to copy, distribute and/or modify this
+     document under the terms of the GNU Free Documentation License,
+     Version 1.3 or any later version published by the Free Software
+     Foundation; with no Invariant Sections, no Front-Cover Texts, and
+     no Back-Cover Texts.  A copy of the license is included in the
+     section entitled ``GNU Free Documentation License''.
+   -->
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Example-echo-client"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="GNU-Free-Documentation-License.html#GNU-Free-Documentation-License">GNU Free Documentation License</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="Example-echo-server.html#Example-echo-server">Example echo server</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="index.html#Top">Top</a>
+<hr>
+</div>
+
+<h2 class="appendix">Appendix B Example echo client</h2>
+
+<p>This chapter shows how to build a simple echo client reading from stdin. 
+This example is included in the distributed package in
+'src/websocket4j/examples/EchoClient.java'.
+
+<pre class="verbatim">package websocket4j.examples;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
+import websocket4j.client.WebSocket;
+
+/**
+ * This file is part of GNU WebSocket4J.
+ * Copyright (C) 2010  Marek Aaron Sapota
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+ *
+ * As a special exception, the copyright holders of this library give you
+ * permission to link this library with independent modules to produce an
+ * executable, regardless of the license terms of these independent modules,
+ * and to copy and distribute the resulting executable under terms of your choice,
+ * provided that you also meet, for each linked independent module, the terms and
+ * conditions of the license of that module. An independent module is a module
+ * which is not derived from or based on this library. If you modify this library,
+ * you may extend this exception to your version of the library, but you are not
+ * obligated to do so. If you do not wish to do so, delete this exception
+ * statement from your version.
+ */
+
+/**
+ * Example presenting an echo client using WebSocket4J.
+ */
+public class EchoClient {
+
+    public static void main(String[] args) throws IOException {
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        WebSocket ws = new WebSocket("localhost", 5555, "/echo");
+        while (true) {
+            String message = in.readLine();
+            ws.sendMessage(message);
+            System.out.println("Response: " + ws.getMessage());
+            if (message.equals("exit"))
+                break;
+        }
+        ws.close();
+    }
+
+}
+</pre>
+
+   </body></html>
+

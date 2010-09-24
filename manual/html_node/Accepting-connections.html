@@ -1,0 +1,98 @@
+<html lang="en">
+<head>
+<title>Accepting connections - GNU WebSocket4J Reference Manual (version 1.3)</title>
+<meta http-equiv="Content-Type" content="text/html">
+<meta name="description" content="GNU WebSocket4J Reference Manual (version 1.3)">
+<meta name="generator" content="makeinfo 4.13">
+<link title="Top" rel="start" href="index.html#Top">
+<link rel="prev" href="WebSocket.html#WebSocket" title="WebSocket">
+<link rel="next" href="Connecting-to-server.html#Connecting-to-server" title="Connecting to server">
+<link href="http://www.gnu.org/software/texinfo/" rel="generator-home" title="Texinfo Homepage">
+<!--
+This file is part of GNU WebSocket4J Reference Manual (version 1.3).
+
+Copyright (C) 2010  Marek Aaron Sapota
+
+     Permission is granted to copy, distribute and/or modify this
+     document under the terms of the GNU Free Documentation License,
+     Version 1.3 or any later version published by the Free Software
+     Foundation; with no Invariant Sections, no Front-Cover Texts, and
+     no Back-Cover Texts.  A copy of the license is included in the
+     section entitled ``GNU Free Documentation License''.
+   -->
+<meta http-equiv="Content-Style-Type" content="text/css">
+<style type="text/css"><!--
+  pre.display { font-family:inherit }
+  pre.format  { font-family:inherit }
+  pre.smalldisplay { font-family:inherit; font-size:smaller }
+  pre.smallformat  { font-family:inherit; font-size:smaller }
+  pre.smallexample { font-size:smaller }
+  pre.smalllisp    { font-size:smaller }
+  span.sc    { font-variant:small-caps }
+  span.roman { font-family:serif; font-weight:normal; } 
+  span.sansserif { font-family:sans-serif; font-weight:normal; } 
+--></style>
+</head>
+<body>
+<div class="node">
+<a name="Accepting-connections"></a>
+<p>
+Next:&nbsp;<a rel="next" accesskey="n" href="Connecting-to-server.html#Connecting-to-server">Connecting to server</a>,
+Previous:&nbsp;<a rel="previous" accesskey="p" href="WebSocket.html#WebSocket">WebSocket</a>,
+Up:&nbsp;<a rel="up" accesskey="u" href="index.html#Top">Top</a>
+<hr>
+</div>
+
+<h2 class="chapter">2 Accepting connections</h2>
+
+<p><a name="index-making-a-WebSocket-server-6"></a><a name="index-accepting-WebSocket-connections-7"></a>
+This chapter tells how to use GNU WebSocket4J in a server application.
+
+<h3 class="heading">Naming convention</h3>
+
+<p>Throughout this chapter <code>WebServerSocket</code> will refer to
+<code>websocket4j.server.WebServerSocket</code> class and <code>WebSocket</code>
+will refer to <code>websocket4j.server.WebSocket</code> class.
+
+<h3 class="heading">General idea</h3>
+
+<p>Accepting WebSocket connections is similar to using TCP sockets from the
+standard library.  You have to create an instance of
+<code>WebServerSocket</code> (modelled after <code>java.net.ServerSocket</code>),
+and then you can use <code>accept() : WebSocket</code> method to get incoming
+connections.  Accepted sockets have successfully completed an opening
+handshake and are ready to use (see <a href="Using-an-established-socket.html#Using-an-established-socket">Using an established socket</a>).
+
+<h3 class="heading">Creating a WebServerSocket instance</h3>
+
+<p><code>websocket4j.server.WebServerSocket</code> has two constructors, first
+without any parameters and second taking an <code>Integer</code>.  Second one
+creates a new socket listening on port specified as an argument, and the
+first one chooses a random free port.  If you create a socket listening
+on a random port, you can use <code>getLocalPort() : Integer</code> method to get that
+port number.
+
+<h3 class="heading">Accepting new connnections</h3>
+
+<p><code>accept() : WebSocket</code> works similar to method, of
+<code>java.net.ServerSocket</code> class, of the same name.  It waits until
+someone connects and returns an established socket.  You can limit the
+time for which <code>accept</code> will block with <code>setSoTimeout(Integer)
+: void</code> method (provided <code>Integer</code> is time in milliseconds) &mdash; if
+no client connects in this much time a <code>java.io.IOException</code> will
+be thrown.
+
+   <p>After you've accepted a socket, you can use <code>getRequestUri() :
+String</code> method of <code>WebSocket</code> to get URI requested by client, so
+you can decide what to do next with this socket.
+
+<h3 class="heading">Closing the socket</h3>
+
+<p>Both <code>WebServerSocket</code> and <code>WebSocket</code> have <code>close() :
+void</code> method that closes the socket and ends connection in case of
+<code>WebSocket</code>, or stops listening for new connections in case of
+<code>WebServerSocket</code>.  <code>isClosed() : Boolean</code> method can be used
+to determine if socket is already closed.
+
+   </body></html>
+

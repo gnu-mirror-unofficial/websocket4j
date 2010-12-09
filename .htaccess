@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ http://maarons.alwaysdata.net/software/GNU/WebSocket4J/$1

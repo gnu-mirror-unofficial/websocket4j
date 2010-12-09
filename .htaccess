@@ -1,5 +1,4 @@
 RewriteEngine On
-RewriteRule ^manual/$ manual/index.html
-RewriteRule ^manual$ manual/index.html
+RewriteRule ^manual/?$ manual/index.html
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^(.*)$ http://maarons.alwaysdata.net/software/GNU/WebSocket4J/$1

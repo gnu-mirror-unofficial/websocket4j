@@ -1,4 +1,4 @@
 RewriteEngine On
 RewriteRule ^manual/?$ manual/index.html [PT]
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^.*$ http://marek.sapota.org/software/gnu_websocket4j.html
+RewriteRule ^.*$ https://launchpad.net/websocket4j/
